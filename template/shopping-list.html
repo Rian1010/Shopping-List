@@ -1,3 +1,25 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 
+{% block navbar %}
+<nav class="navbar navbar-expand-sm navbar-light bg-info">
+    <a class="navbar-brand">Shopping List</a>
+
+    <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-expanded="navbarNavDropdown" aria-controls="false">
+
+        <span class="navbar-toggler-icon"></span></button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="{{ url_for('index') }}" class="nav-link">Lgin</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>Shopping List</h1>
+<a href="{{ url_for('logout') }}">Logout</a>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% block navbar %}
 <nav class="navbar navbar-expand-sm navbar-light bg-info">
     <a class="navbar-brand">Shopping List</a>
@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a href="{{ url_for('index') }}" class="nav-link">Lgin</a>
+                <a href="{{ url_for('register') }}" class="nav-link">Register</a>
             </li>
         </ul>
     </div>
@@ -20,11 +20,11 @@
 
 {% block content %}
     <section>
-        <h1>Register</h1>
+        <h1>Login</h1>
         <div class="container">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
-                    <form action="{{ url_for('register') }}" method="POST">
+                    <form action="{{ url_for('login') }}" method="POST">
                         <!-- the form-group class adds fitting margins-->
                         <div class="form-group">
                             <label for="">Username</label>
@@ -35,10 +35,10 @@
                             <label for="">Password</label>
                             <input type="password" name="pass" class="form-control" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Register Now!</button>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
                     <div>
-                        <a href="{{ url_for('login') }}">Login Here Now!</a>
+                        <a href="{{ url_for('register') }}">Register Here Now!</a>
                     </div>
                 </div>
             </div>

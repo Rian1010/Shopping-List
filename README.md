@@ -23,3 +23,6 @@ $ git add .
 $ git commit -am "make it better"
 $ heroku git:remote -a shopping-list-google
 
+
+- Logout: https://www.bogotobogo.com/python/Flask/Python_Flask_Blog_App_Tutorial_2.php
+

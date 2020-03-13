@@ -52,11 +52,71 @@ def register():
 @app.route('/logout')
 def logout():
     session.pop('user', None)
-    return redirect('/signin')
+    return redirect('signin')
 
 @app.route('/shoppingList')
-def shopping_list():
-    return render_template('shopping-list.html')
+def shoppingListName():
+    listName = mongo.db.listName.find()
+    return render_template('index.html', listName=listName)
+
+@app.route('/listItem')
+def listItem():
+    itemName = mongo.db.itemName.find()
+    return render_template('index.html', itemName=itemName)
+
+@app.route('/addShoppingList')
+def addShoppingList():
+    listName = mongo.db.listName.find()
+    return render_template('addShoppingList.html', listName=listName)
+
+@app.route('/addItem')
+def addItem():
+    itemName = mongo.db.itemName.find()
+    return render_template('addItem.html', itemName=itemName)
+
+@app.route('/updateListName/<list_id>', methods=['POST'])
+def updateListName(list_id):
+    listName = mongo.db.listName.find()
+    listName.update({'_id': ObjectId(list_id)})
+    return redirect(url_for('shoppingListName'))
+
+@app.route('/updateItemName/<item_id>', methods=['POST'])
+def updateItemName(item_id):
+    itemName = mongo.db.itemName.find()
+    itemName.update({'_id': ObjectId(item_id)})
+    return redirect(url_for('shoppingListName'))
+
+@app.route('/insertList', methods=['POST'])
+def insertList():
+    listName = mongo.db.listName
+    listName.insert_one(request.form.to_dict())
+    return redirect(url_for('shoppingListName'))
+
+@app.route('/insertItem', methods=['POST'])
+def insertItem():
+    itemName = mongo.db.itemName
+    itemName.insert_one(request.form.to_dict())
+    return redirect(url_for('shoppingListName'))
+
+@app.route('/editList/<list_id>')
+def editList(list_id):
+    listName = mongo.db.listName.find_one({"_id": ObjectId(list_id)})
+    return render_template('editShoppingList.html', listName=listName)
+
+@app.route('/editItem/<item_id>')
+def editItem(item_id):
+    itemName = mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
+    return render_template('editListItem.html', itemName=itemName)
+
+@app.route('/deleteList/<list_id>')
+def deleteList(list_id):
+    mongo.db.remove({"_id": ObjectId(list_id)})
+    return redirect(url_for('shoppingListName'))
+
+@app.route('/deleteItem/<item_id>')
+def deleteItem(item_id):
+    mongo.db.remove({"_id": ObjectId(item_id)})
+    return redirect(url_for('shoppingListName'))
 
 if __name__ == '__main__':
     app.secret_key = 'mysecret'

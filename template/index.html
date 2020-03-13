@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block navbar %}
 <nav class="navbar navbar-expand-sm navbar-light bg-info">
     <a class="navbar-brand">Shopping List</a>
@@ -13,13 +13,62 @@
             <li class="nav-item active">
                 <a href="{{ url_for('register') }}" class="nav-link">Register</a>
             </li>
+            <li class="nav-item active">
+                <a href="{{ url_for('signin') }}" class="nav-link">Login</a>
+            </li>
         </ul>
     </div>
 </nav>
 {% endblock %}
 
 {% block content %}
-    <h1>Index</h1>
-    <a href="{{ url_for('logout') }}">Logout</a>
+<h1>Index</h1>
+<section>
 
+    <div class="container">
+        <div class="row">
+            {% for shopList in listName %}
+            <div class="col-md-3">
+                <div class="shopping-list">
+                    <h2>{{ shopList.listName }}</h2>
+                    {% for item in itemName %}
+                    <div class="shopping-list-item">
+                        <p>{{ item.itemName }}</p>
+                    </div>
+                    {% endfor %}
+                    <section>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 offset-md-6 col-md-6 offset-xl-4 col-xl-4 offset-xl-4 justify-content-center circle">
+                                    <a href="{{ url_for('addItem') }}" class="">
+                                        <div class="plus-sign-add-task">
+                                            <p>+</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+			<div class="col-12 offset-md-6 col-md-6 offset-xl-4 col-xl-4 offset-xl-4 justify-content-center circle">
+				<a href="{{ url_for('addShoppingList') }}" class="">
+					<div class="plus-sign-add-task">
+						<p>test</p>
+					</div>
+				</a>
+			</div>
+		</div>
+    </div>
+</section>
 {% endblock %}

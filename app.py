@@ -1,5 +1,4 @@
 import os
-import bcrypt
 from flask import Flask, render_template, session, url_for, request, redirect
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -17,42 +16,59 @@ def index():
 
     return render_template('login.html')
 
-@app.route('/signin')
-def signin():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    email = session.get('email-address')
+
+    if request.method == 'POST':
+        email = request.form["email-address"]
+        password = request.form['pass']
+        acc = mongo.db.account.find_one({"email-address": email})
+        print(email, password, acc)
+        if mongo.db.account.find_one({"email-address": email}) and mongo.db.account.find_one({"pass": password}):
+            session['email'] = acc['email-address']
+            return render_template('index.html')
+        else:
+            return 'Invalid email or password'
+
     return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
-def login():
-    users = mongo.db.user
-    user_login = users.find_one({'name' : request.form['username']})
+# First try
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     users = mongo.db.user
+#     user_login = users.find_one({'name' : request.form['username']})
 
-    if user_login:
-        if bcrypt.hashpw(request.form['pass'].encode['utf-8'], user_login['password'].encode('utf-8')) == user_login['password'].encode('utf-8'):
-            session['username'] = request.form['username']
-            return redirect(url_for('index.html'))
-    return 'Invalid username or password'
-
+#     if user_login:
+#         if bcrypt.hashpw(request.form['pass'].encode['utf-8'], user_login['password'].encode('utf-8')) == user_login['password'].encode('utf-8'):
+#             session['name'] = request.form['username']
+#             return redirect(url_for('index.html'))
+#     else:
+#         flash(f'Invalid username')         
+#     return 'Invalid username or password'
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    email = session.get('email-address')
+
     if request.method == 'POST':
-        users = mongo.db.users
-        user_exists = users.find_one({'name': request.form['username']})
+        email = request.form['email-address']
+        password = request.form['pass']
+        account = {'email-address': email, 'pass': password}
 
-        if user_exists is None:
-            hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
-            users.insert_one({'name': request.form['username'], 'password': hashpass})
-            session['username'] = request.form['username']
-            return redirect(url_for('index'))
-
-        return 'The username that you have entered already exists!'
+        if mongo.db.account.find_one({'email-address': email}):
+            return 'User already exists.'
+        else:
+            mongo.db.account.insert_one(account)
+            session['email'] = request.form['email-address']
+            return render_template('index.html', account=account, password=password)
 
     return render_template('register.html')
 
 @app.route('/logout')
 def logout():
-    session.pop('user', None)
-    return redirect('signin')
+    session.pop('email', None)
+    return redirect('login')
 
 @app.route('/shoppingList')
 def shoppingListName():
@@ -74,25 +90,30 @@ def addItem():
     itemName = mongo.db.itemName.find()
     return render_template('addItem.html', itemName=itemName)
 
-@app.route('/updateListName/<list_id>', methods=['POST'])
+@app.route('/updateListName/<list_id>', methods=['GET','POST'])
 def updateListName(list_id):
-    listName = mongo.db.listName.find()
-    listName.update({'_id': ObjectId(list_id)})
+    listName = mongo.db.listName
+    listName.update({'_id': ObjectId(list_id)},
+                    {
+            'listName': request.form.get('listName'),
+    })
     return redirect(url_for('shoppingListName'))
 
-@app.route('/updateItemName/<item_id>', methods=['POST'])
+@app.route('/updateItemName/<item_id>', methods=['GET', 'POST'])
 def updateItemName(item_id):
-    itemName = mongo.db.itemName.find()
+    itemName = mongo.db.itemName
     itemName.update({'_id': ObjectId(item_id)})
-    return redirect(url_for('shoppingListName'))
+    return redirect(url_for('shoppingListName', itemName=itemName))
 
-@app.route('/insertList', methods=['POST'])
+@app.route('/insertList', methods=['GET', 'POST'])
 def insertList():
     listName = mongo.db.listName
-    listName.insert_one(request.form.to_dict())
+    listName.insert_one({
+            'listName': request.form.get('listName'),
+    },)
     return redirect(url_for('shoppingListName'))
 
-@app.route('/insertItem', methods=['POST'])
+@app.route('/insertItem', methods=['GET', 'POST'])
 def insertItem():
     itemName = mongo.db.itemName
     itemName.insert_one(request.form.to_dict())
@@ -110,12 +131,13 @@ def editItem(item_id):
 
 @app.route('/deleteList/<list_id>')
 def deleteList(list_id):
-    mongo.db.remove({"_id": ObjectId(list_id)})
+    mongo.db.listName.remove({"_id": ObjectId(list_id)})
+    mongo.db.itemName.remove({"_id": ObjectId(list_id)})
     return redirect(url_for('shoppingListName'))
 
 @app.route('/deleteItem/<item_id>')
 def deleteItem(item_id):
-    mongo.db.remove({"_id": ObjectId(item_id)})
+    mongo.db.itemName.remove({"_id": ObjectId(item_id)})
     return redirect(url_for('shoppingListName'))
 
 if __name__ == '__main__':

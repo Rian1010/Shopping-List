@@ -27,9 +27,9 @@
                     <form action="{{ url_for('login') }}" method="POST">
                         <!-- the form-group class adds fitting margins-->
                         <div class="form-group">
-                            <label for="">Username</label>
+                            <label for="">Google Account</label>
                             <!-- the form-control class is used to style the text-box -->
-                            <input type="text" name="username" class="form-control" placeholder="Username">
+                            <input type="email" name="email-address" class="form-control" pattern="^[a-zA-Z0-9]+@gmail\.com$" placeholder="Email Address">
                         </div>
                         <div class="form-groups">
                             <label for="">Password</label>

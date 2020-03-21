@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block content %}
-<section  class="page-padding-top">
+<section class="page-padding-top">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center head-padding-bottom">
@@ -36,55 +36,84 @@
     </div>
 </section>
 
-<section>
-    <div class="container">
-        <div class="row">
-            {% for listHead in listName %}
-            <div class="col-md-3">
-                <div class="shopping-list">
-                    <h2>{{ listHead.liName }}</h2>
-                    
-                    {% for item in itemName %}
-                    <div class="shopping-list-item">
-                        <p>{{ item.itName }}</p>
-                        <a href="{{ url_for('deleteItem', item_id=item._id) }}">Delete Item</a>
-                    </div>
-
-                    <a href="{{ url_for('deleteList', list_id=listHead._id, item_id=item._id) }}">
-                        <button class="btn btn-danger" type="submit">Delete EntireShopping-List</button>
-                    </a>
-                    {% endfor %}
-                    <a href="{{ url_for('editList', list_id=listHead._id) }}">
-                        <button class="btn btns" type="submit">Edit List Name</button>
-                    </a>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 offset-md-6 col-md-6 offset-xl-4 col-xl-4 offset-xl-4 justify-content-center">
-                                    <a href="{{ url_for('addItem') }}">
-                                        <div>
-                                            <p>Add New Item</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
 <section class="page-padding-bottom">
     <div class="container">
         <div class="row">
-            <div class="col-12 offset-md-6 col-md-6 offset-xl-4 col-xl-4 offset-xl-4 justify-content-center circle">
-                <a href="{{ url_for('addShoppingList') }}" class="">
-                    <button class="btn btns">
-                        <p class="btn-text-style">Add A New Shopping-List</p>
-                    </button>
-                </a>
+            <div class="col-12">
+                <div class="item-bground-purple">
+                    <div class="shopping-list-item text-center">
+                        <div class="row">
+                            <div class="col-4">
+                                <h5 class="no-margin">Item Name</h5>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="no-margin">Amount</h5>
+                            </div>
+                            <div class="col-4">
+                                <h5>Edits</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="shopping-list">
+                    {% for item in itemName %}
+                    {% if loop.index % 2 == 0 %}
+                    <div class="item-bground-purple">
+                        <div class="shopping-list-item">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="no-margin">{{ item.itName }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="no-margin">{{ item.amount }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <a href="{{ url_for('editItem', item_id=item._id) }}">Edit Item</a>
+                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}">Delete Item</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% else %}
+                    <div class="item-bground-white">
+                        <div class="shopping-list-item">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="no-margin">{{ item.itName }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="no-margin">{{ item.amount }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <a href="{{ url_for('editItem', item_id=item._id) }}">Edit Item</a>
+                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}">Delete Item</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% endfor %}
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <a href="{{ url_for('addItem') }}">
+                                    <p>Add New Item</p>
+                                </a>
+                                <a href="{{ url_for('deleteList') }}">
+                                    <button class="btn btn-danger" type="submit">Delete Entire Shopping-List</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

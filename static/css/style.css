@@ -69,6 +69,24 @@
     padding: 20px 0;
 }
 
+.shopping-list-item {
+    margin:0;
+    padding: 20px 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.item-bground-purple {
+    color: #fff;
+    background-color: rgb(109, 0, 235);
+}
+
+.item-bground-white {
+    background-color: #fff;
+}
+
 .btns {
     display: flex;
     justify-content: center;

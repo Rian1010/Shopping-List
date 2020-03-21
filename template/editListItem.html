@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block navbar %}
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: rgb(255, 225, 94);">
+    <a href="{{ url_for('index') }}" class="navbar-brand">Shopping List</a>
+
+    <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-expanded="navbarNavDropdown" aria-controls="false">
+
+        <span class="navbar-toggler-icon"></span></button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="{{ url_for('index') }}" class="nav-link">Homepage</a>
+            </li>
+            <li class="nav-item active">
+                <a href="{{ url_for('shoppingList') }}" class="nav-link">Shopping-List</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form action="{{ url_for('updateItemName', item_id=itemName._id) }}" method="POST" class="col-12 task-box text-center">
+                    <div class="row">
+                        <div class="col-12">
+                            <textarea id="itName" name="itName" type="text"
+                                placeholder="Description" required>{{itemName.itName}}</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <textarea id="amount" name="amount" type="text"
+                                placeholder="Description" required>{{itemName.amount}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button class="btn btn-info" type="submit" name="action">Done
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

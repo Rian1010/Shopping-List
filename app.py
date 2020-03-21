@@ -11,10 +11,9 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-    
-
-    if 'username' in session:
-        return render_template('index.html')
+    email = session.get('email-address')
+    if email == False:
+        return render_template('login.html')
 
     return render_template('login.html')
 
@@ -27,7 +26,7 @@ def login():
         email = request.form["email-address"]
         password = request.form['pass']
         acc = mongo.db.account.find_one({"email-address": email})
-        print(email, password, acc)
+
         if mongo.db.account.find_one({"email-address": email}) and mongo.db.account.find_one({"pass": password}):
             session['email'] = acc['email-address']
             return render_template('index.html')
@@ -75,11 +74,11 @@ def logout():
 
 @app.route('/shoppingList')
 def shoppingList():
-    
-
-    listName = mongo.db.listName.find()
+    email = session.get('email-address')
+    if email == False:
+        return render_template('login.html')
     itemName = mongo.db.itemName.find()
-    return render_template('shopping-list.html', listName=listName, itemName=itemName)
+    return render_template('shopping-list.html', itemName=itemName)
 
 @app.route('/listItem')
 def listItem():
@@ -122,8 +121,10 @@ def updateListName(list_id):
 @app.route('/updateItemName/<item_id>', methods=['GET', 'POST'])
 def updateItemName(item_id):
     itemName = mongo.db.itemName
-    itemName.update({
+    itemName.update({"_id": ObjectId(item_id)},
+    {
             'itName': request.form.get('itName'),
+            'amount': request.form.get('amount')
     },)
     return redirect(url_for('shoppingList', itemName=itemName))
 
@@ -137,10 +138,9 @@ def editItem(item_id):
     itemName = mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
     return render_template('editListItem.html', itemName=itemName)
 
-@app.route('/deleteList/<list_id>/<item_id>')
-def deleteList(list_id, item_id):
-    mongo.db.listName.remove({"_id": ObjectId(list_id)})
-    mongo.db.itemName.remove({"_id": ObjectId(item_id)})
+@app.route('/deleteList')
+def deleteList():
+    mongo.db.itemName.remove()
     return redirect(url_for('shoppingList'))
 
 @app.route('/deleteItem/<item_id>')

@@ -23,6 +23,8 @@ $ git add .
 $ git commit -am "make it better"
 $ heroku git:remote -a shopping-list-google
 
-
+- Homepage banner image from: https://pixabay.com/de/photos/einkaufswagen-shopping-laptop-4516039/
+- Colouring the navbar: https://getbootstrap.com/docs/4.0/components/navbar/
+- Login: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
 - Logout: https://www.bogotobogo.com/python/Flask/Python_Flask_Blog_App_Tutorial_2.php
 

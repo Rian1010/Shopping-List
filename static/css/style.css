@@ -1,0 +1,115 @@
+/* Homepage */
+.banner {
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    background-image: linear-gradient(to right, rgba(0, 17, 54, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 17, 54, 0.3)), url('../images/homepage-banner.jpg');
+    background-size: cover;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.banner-anchor-position {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-btn-place {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-no-underline:hover {
+    text-decoration: none;
+}
+
+.btn-arrow {
+    position: relative;
+    animation-name: arrow-movement;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes arrow-movement {
+    0% {
+        left: 0;
+    }
+
+    50% {
+        left: 7px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+/* Shopping-List Page */
+.page-padding-top {
+    padding-top: 50px;
+}
+
+.page-padding-bottom {
+    padding-bottom: 50px;
+}
+
+.head-padding-bottom {
+    padding-bottom: 50px;
+}
+
+.shopping-list {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background-color: rgb(251, 251, 162);
+    padding: 20px 0;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 50px 0;
+    background-color: rgb(100, 4, 209);
+    color: #FFF;
+}
+
+.btns:hover {
+    text-decoration: none;
+}
+
+.btn-text-style {
+    margin: 0;
+}
+
+.btn-text-style:hover {
+    text-decoration: none;
+}
+
+.footer {
+    text-align: center;
+    padding: 50px;
+    background-color: rgb(255, 208, 0);
+}
+
+.footer-items {
+    padding: 0;
+}
+
+.footer-link {
+    text-decoration: none;
+    list-style: none;
+}
+
+.link-decor {
+    color: #000;
+}
+
+.link-decor:hover {
+    color: #000;
+}

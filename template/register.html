@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block navbar %}
-<nav class="navbar navbar-expand-sm navbar-light bg-info">
+<nav class="navbar navbar-expand-sm navbar-light"  style="background-color: rgb(255, 208, 0);">
     <a class="navbar-brand">Shopping List</a>
 
     <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a href="{{ url_for('index') }}" class="nav-link">Lgin</a>
+                <a href="{{ url_for('index') }}" class="nav-link">Login</a>
             </li>
         </ul>
     </div>
@@ -20,7 +20,15 @@
 
 {% block content %}
 <section>
-    <h1>Register</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center head-padding-bottom">
+                <h1>Register</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
@@ -36,9 +44,9 @@
                         <label for="">Password</label>
                         <input type="password" name="pass" class="form-control" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Register Now!</button>
+                    <button type="submit" class="btn btn-primary btn-block btns">Register Now!</button>
                 </form>
-                <div>
+                <div class="text-center">
                     <a href="{{ url_for('login') }}">Login Here Now!</a>
                 </div>
             </div>

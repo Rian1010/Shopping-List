@@ -11,11 +11,14 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
+    
+
     if 'username' in session:
         return render_template('index.html')
 
     return render_template('login.html')
 
+# Used this link for assistance https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     email = session.get('email-address')
@@ -71,9 +74,12 @@ def logout():
     return redirect('login')
 
 @app.route('/shoppingList')
-def shoppingListName():
+def shoppingList():
+    
+
     listName = mongo.db.listName.find()
-    return render_template('index.html', listName=listName)
+    itemName = mongo.db.itemName.find()
+    return render_template('shopping-list.html', listName=listName, itemName=itemName)
 
 @app.route('/listItem')
 def listItem():
@@ -90,34 +96,36 @@ def addItem():
     itemName = mongo.db.itemName.find()
     return render_template('addItem.html', itemName=itemName)
 
-@app.route('/updateListName/<list_id>', methods=['GET','POST'])
-def updateListName(list_id):
-    listName = mongo.db.listName
-    listName.update({'_id': ObjectId(list_id)},
-                    {
-            'listName': request.form.get('listName'),
-    })
-    return redirect(url_for('shoppingListName'))
-
-@app.route('/updateItemName/<item_id>', methods=['GET', 'POST'])
-def updateItemName(item_id):
-    itemName = mongo.db.itemName
-    itemName.update({'_id': ObjectId(item_id)})
-    return redirect(url_for('shoppingListName', itemName=itemName))
-
 @app.route('/insertList', methods=['GET', 'POST'])
 def insertList():
     listName = mongo.db.listName
     listName.insert_one({
-            'listName': request.form.get('listName'),
+            'liName': request.form.get('liName'),
     },)
-    return redirect(url_for('shoppingListName'))
+    return redirect(url_for('shoppingList'))
 
 @app.route('/insertItem', methods=['GET', 'POST'])
 def insertItem():
     itemName = mongo.db.itemName
     itemName.insert_one(request.form.to_dict())
-    return redirect(url_for('shoppingListName'))
+    return redirect(url_for('shoppingList'))
+
+@app.route('/updateListName/<list_id>', methods=['GET','POST'])
+def updateListName(list_id):
+    listName = mongo.db.listName
+    listName.update({'_id': ObjectId(list_id)},
+                    {
+            'liName': request.form.get('liName'),
+    })
+    return redirect(url_for('shoppingList'))
+
+@app.route('/updateItemName/<item_id>', methods=['GET', 'POST'])
+def updateItemName(item_id):
+    itemName = mongo.db.itemName
+    itemName.update({
+            'itName': request.form.get('itName'),
+    },)
+    return redirect(url_for('shoppingList', itemName=itemName))
 
 @app.route('/editList/<list_id>')
 def editList(list_id):
@@ -129,16 +137,16 @@ def editItem(item_id):
     itemName = mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
     return render_template('editListItem.html', itemName=itemName)
 
-@app.route('/deleteList/<list_id>')
-def deleteList(list_id):
+@app.route('/deleteList/<list_id>/<item_id>')
+def deleteList(list_id, item_id):
     mongo.db.listName.remove({"_id": ObjectId(list_id)})
-    mongo.db.itemName.remove({"_id": ObjectId(list_id)})
-    return redirect(url_for('shoppingListName'))
+    mongo.db.itemName.remove({"_id": ObjectId(item_id)})
+    return redirect(url_for('shoppingList'))
 
 @app.route('/deleteItem/<item_id>')
 def deleteItem(item_id):
     mongo.db.itemName.remove({"_id": ObjectId(item_id)})
-    return redirect(url_for('shoppingListName'))
+    return redirect(url_for('shoppingList'))
 
 if __name__ == '__main__':
     app.secret_key = 'mysecret'

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block navbar %}
-<nav class="navbar navbar-expand-sm navbar-light bg-info">
+<nav class="navbar navbar-expand-sm navbar-light"  style="background-color: rgb(255, 208, 0);">
     <a class="navbar-brand">Shopping List</a>
 
     <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -11,10 +11,13 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a href="{{ url_for('register') }}" class="nav-link">Register</a>
+                <a href="{{ url_for('index') }}" class="nav-link">Homepage</a>
             </li>
-            <li class="nav-item active">
-                <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+            <li class="nav-item">
+                <a href="{{ url_for('shoppingList') }}" class="nav-link">Shopping-List</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
             </li>
         </ul>
     </div>
@@ -22,57 +25,19 @@
 {% endblock %}
 
 {% block content %}
-<h1>Index</h1>
-<section>
-
+<section class="banner">
     <div class="container">
         <div class="row">
-            {% for shopList in listName %}
-            <div class="col-md-3">
-                <div class="shopping-list">
-                    <h2>{{ shopList.listName }}</h2>
-
-                    <a href="{{ url_for('editList', list_id=shopList._id) }}">
-                        <button class="btn btn-info" type="submit">Edit List Name</button>
-                    </a>
-                    <a href="{{ url_for('deleteList', list_id=shopList._id) }}">
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </a>
-                    {% for item in itemName %}
-                    <div class="shopping-list-item">
-                        <p>{{ item.itemName }}</p>
-                    </div>
-                    {% endfor %}
-                    <section>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12 offset-md-6 col-md-6 offset-xl-4 col-xl-4 offset-xl-4 justify-content-center">
-                                    <a href="{{ url_for('addItem') }}">
-                                        <div>
-                                            <p>+</p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+            <div class="col-12 text-center head-padding-bottom">
+                <h1>Welcome to Your Online Shopping-List!</h1>
             </div>
-            {% endfor %}
         </div>
-    </div>
-
-    <a href="{{ url_for('logout') }}">Logout</a>
-</section>
-
-<section>
-    <div class="container">
         <div class="row">
-            <div class="col-12 offset-md-6 col-md-6 offset-xl-4 col-xl-4 offset-xl-4 justify-content-center circle">
-                <a href="{{ url_for('addShoppingList') }}" class="">
-                    <div class="plus-sign-add-task">
-                        <p>test</p>
-                    </div>
+            <div class="col-12 banner-btn-place">
+                <a href="{{ url_for('shoppingList') }}" class="banner-anchor-position btn-no-underline">
+                    <button class="btn btns">
+                        <p class="btn-text-style">Go to Your Shopping-List <span class="btn-arrow"><i class="fa fa-arrow-right"></i></span></p>
+                    </button>
                 </a>
             </div>
         </div>

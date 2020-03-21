@@ -1,7 +1,7 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block navbar %}
-<nav class="navbar navbar-expand-sm navbar-light bg-info">
-    <a class="navbar-brand">Shopping List</a>
+<nav class="navbar navbar-expand-sm navbar-light"  style="background-color: rgb(255, 208, 0);">
+    <a href="{{ url_for('index') }}" class="navbar-brand">Shopping List</a>
 
     <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-expanded="navbarNavDropdown" aria-controls="false">
@@ -19,29 +19,39 @@
 {% endblock %}
 
 {% block content %}
-    <section>
-        <h1>Login</h1>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <form action="{{ url_for('login') }}" method="POST">
-                        <!-- the form-group class adds fitting margins-->
-                        <div class="form-group">
-                            <label for="">Google Account</label>
-                            <!-- the form-control class is used to style the text-box -->
-                            <input type="email" name="email-address" class="form-control" pattern="^[a-zA-Z0-9]+@gmail\.com$" placeholder="Email Address">
-                        </div>
-                        <div class="form-groups">
-                            <label for="">Password</label>
-                            <input type="password" name="pass" class="form-control" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-                    </form>
-                    <div>
-                        <a href="{{ url_for('register') }}">Register Here Now!</a>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center head-padding-bottom">
+                <h1>Login</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <form action="{{ url_for('login') }}" method="POST">
+                    <!-- the form-group class adds fitting margins-->
+                    <div class="form-group">
+                        <label for="">Google Account</label>
+                        <!-- the form-control class is used to style the text-box -->
+                        <input type="email" name="email-address" class="form-control"
+                            pattern="^[a-zA-Z0-9]+@gmail\.com$" placeholder="Email Address">
                     </div>
+                    <div class="form-groups">
+                        <label for="">Password</label>
+                        <input type="password" name="pass" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btns">Login</button>
+                </form>
+                <div class="text-center">
+                    <a href="{{ url_for('register') }}">Register Here Now!</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}

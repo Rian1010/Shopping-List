@@ -6,19 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <title>Document</title>
 </head>
 
 <body>
     <header>
-
         {% block navbar %} {% endblock %}
-
     </header>
-    <article>
+    <article">
         {% block content %} {% endblock %}
     </article>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h2>Contacts</h2>
+                    <ul class="footer-items">
+                        <li class="footer-link"><a href="tel: 12 3456 7890" class="link-decor">Phone number: +12 4567 7890</a></li>
+                        <li class="footer-link"><a href="mailto: sunthbocusrian@gmail.com" class="link-decor">sunthbocusrian@gmail.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <h2>Social Media</h2>
+                    <ul class="footer-items">
+						<li class="footer-link"><a href="http://www.instagram.com" class="link-decor" target="_blank">Instagram</a></li>
+					</ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

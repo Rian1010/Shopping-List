@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block navbar %}
-<nav class="navbar navbar-expand-sm navbar-light bg-info">
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: rgb(255, 225, 94);">
     <a class="navbar-brand">Shopping List</a>
 
     <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -14,7 +14,7 @@
                 <a href="{{ url_for('register') }}" class="nav-link">Register</a>
             </li>
             <li class="nav-item active">
-                <a href="{{ url_for('signin') }}" class="nav-link">Login</a>
+                <a href="{{ url_for('login') }}" class="nav-link">Login</a>
             </li>
         </ul>
     </div>
@@ -38,7 +38,7 @@
                 <form action="{{ url_for('insertItem') }}" method="POST" class="col-12 text-center">
                     <div class="row">
                         <div class="col-12">
-                            <input type="text" id="itemName" name="itemName" placeholder="List Item Name">
+                            <input type="text" id="itemName" name="itName" placeholder="List Item Name">
                         </div>
                     </div>
                     <div class="row">

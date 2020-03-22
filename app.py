@@ -9,13 +9,13 @@ app.config["MONGO_URI"] = 'mongodb+srv://Rian:j4JWQ1Ntzc9u0U7m@myfirstcluster-ge
 
 mongo = PyMongo(app)
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def index():
-    email = session.get('email-address')
-    if email == False:
-        return render_template('login.html')
-
-    return render_template('login.html')
+    if request.method == "POST":
+        email = session.get('email-address')
+        if not email:
+            return render_template('login.html')
+        return render_template('index.html')
 
 # Used this link for assistance https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
 @app.route('/login', methods=['GET', 'POST'])
@@ -72,13 +72,15 @@ def logout():
     session.pop('email', None)
     return redirect('login')
 
-@app.route('/shoppingList')
+@app.route('/shoppingList', methods=["GET", "POST"])
 def shoppingList():
-    email = session.get('email-address')
-    if email == False:
-        return render_template('login.html')
-    itemName = mongo.db.itemName.find()
-    return render_template('shopping-list.html', itemName=itemName)
+    if request.method == "POST":
+        itemName = mongo.db.itemName.find()
+        return render_template('shopping-list.html', itemName=itemName)
+    if request.method == "GET":
+        email = session.get('email-address')
+        if not email:
+            return render_template('login.html')
 
 @app.route('/listItem')
 def listItem():

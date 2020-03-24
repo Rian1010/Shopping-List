@@ -27,7 +27,15 @@ def login():
 
         if acc and mongo.db.account.find_one({"pass": password}):
             session['email'] = acc['email-address']
-            return render_template('index.html')
+            item = mongo.db.itemName
+            item.insert_one(
+                {'owner': session['email'],
+                'itName': "",
+                'itName2': "",
+                'itName3': "",
+                'amount': ""
+        })
+            return render_template('index.html', itemName=item)
         else:
             return 'Invalid email or password'
 
@@ -112,11 +120,10 @@ def insertList():
     return redirect(url_for('shoppingList'))
 
 
-@app.route('/insertItem/<owner_id>', methods=['GET', 'POST'])
-def insertItem(owner_id):
+@app.route('/insertItem/', methods=['GET', 'POST'])
+def insertItem():
     itemName = mongo.db.itemName
     itemName.insert_one({
-        'owner': session['email'],
         'itName': request.form.get('itName'),
         'amount': request.form.get('amount')
     })
@@ -138,14 +145,14 @@ def updateItemName(item_id):
 
 @app.route('/editList/<list_id>')
 def editList(list_id):
-    listName = mongo.db.listName.find_one({"_id": ObjectId(list_id)})
-    return render_template('editShoppingList.html', listName=listName)
+    listName=mongo.db.listName.find_one({"_id": ObjectId(list_id)})
+    return render_template('editShoppingList.html', listName = listName)
 
 
 @app.route('/editItem/<item_id>')
 def editItem(item_id):
-    itemName = mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
-    return render_template('editListItem.html', itemName=itemName)
+    itemName=mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
+    return render_template('editListItem.html', itemName = itemName)
 
 
 @app.route('/deleteList')
@@ -161,7 +168,7 @@ def deleteItem(item_id):
 
 
 if __name__ == '__main__':
-    app.secret_key = 'mysecret'
-    app.run(host=os.environ.get('IP'),
-            port=os.environ.get('PORT'),
-            debug=True)
+    app.secret_key='mysecret'
+    app.run(host = os.environ.get('IP'),
+            port = os.environ.get('PORT'),
+            debug = True)

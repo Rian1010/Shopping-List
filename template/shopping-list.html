@@ -62,7 +62,7 @@
             <div class="col-12">
                 <div class="shopping-list">
                     {% for item in itemName %}
-                    {% if loop.index % 2 == 0 %}
+                    {% if item.owner == session['email'] %}
                     <div class="item-bground-purple">
                         <div class="shopping-list-item">
                             <div class="row">
@@ -80,15 +80,30 @@
                         </div>
                     </div>
 
-                    {% else %}
                     <div class="item-bground-white">
                         <div class="shopping-list-item">
                             <div class="row">
                                 <div class="col-4">
-                                    <p class="no-margin">{{ item.itName }}</p>
+                                    <p class="no-margin">{{ item.itName2 }}</p>
                                 </div>
                                 <div class="col-4">
-                                    <p class="no-margin">{{ item.amount }}</p>
+                                    <p class="no-margin">{{ item.amount2 }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <a href="{{ url_for('editItem', item_id=item._id) }}">Edit Item</a>
+                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}">Delete Item</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-bground-purple">
+                        <div class="shopping-list-item">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="no-margin">{{ item.itName3 }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <p class="no-margin">{{ item.amount3 }}</p>
                                 </div>
                                 <div class="col-4">
                                     <a href="{{ url_for('editItem', item_id=item._id) }}">Edit Item</a>

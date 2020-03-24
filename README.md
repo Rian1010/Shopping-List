@@ -34,3 +34,14 @@ $ touch Procfile
 - Login: https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
 - Logout: https://www.bogotobogo.com/python/Flask/Python_Flask_Blog_App_Tutorial_2.php
 
+
+Adding items separately:
+@app.route('/insertItem/<owner_id>', methods=['GET', 'POST'])
+def insertItem(owner_id):
+    itemName = mongo.db.itemName
+    itemName.insert_one({
+        'owner': session['email'],
+        'itName': request.form.get('itName'),
+        'amount': request.form.get('amount')
+    })
+    return redirect(url_for('shoppingList'))

@@ -15,7 +15,7 @@
                 <a href="{{ url_for('index') }}" class="nav-link">Homepage</a>
             </li>
             <li class="nav-item active">
-                <a href="{{ url_for('shoppingList') }}" class="nav-link">Shopping-List</a>
+                <a href="{{ url_for('shoppingList', email_id=accounts._id) }}" class="nav-link">Shopping-List</a>
             </li>
             <li class="nav-item">
                 <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
@@ -98,7 +98,6 @@
                         </div>
                     </div>
                     {% endif %}
-                    
                     {% endfor %}
 
                     <div class="container">

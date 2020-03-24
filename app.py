@@ -9,25 +9,39 @@ app.config["MONGO_URI"] = 'mongodb+srv://Rian:j4JWQ1Ntzc9u0U7m@myfirstcluster-ge
 
 mongo = PyMongo(app)
 
-@app.route('/', methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        email = session.get('email-address')
-        if not email:
-            return render_template('login.html')
-        return render_template('index.html')
+@app.route('/<email_id>', methods=["GET", "POST"])
+def index(email_id):
+    if session['email']:
+        itemName = mongo.db.itemName.find()
+        accounts = mongo.db.account.find({"_id": ObjectId(email_id)})
+        return render_template('index.html', itemName=itemName, accounts=accounts)
+    return render_template('login.html')
+
+@app.route('/shoppingList/<email_id>', methods=["GET", "POST"])
+def shoppingList(email_id):
+    if 'email' in session:
+        itemName = mongo.db.itemName.find()
+        accounts = mongo.db.account.find({"_id": ObjectId(email_id)})
+        return render_template("shopping-list.html", itemName=itemName, accounts=accounts)
+    return render_template('login.html')
+
+    # ------------ First try ------------ #
+    # if request.method == "POST":
+    #     itemName = mongo.db.itemName.find()
+    #     return render_template('shopping-list.html', itemName=itemName)
+    # email = session.get('email-address')
+    # if "user" in session:
+    #         return render_template('login.html')
 
 # Used this link for assistance https://www.programcreek.com/python/example/58659/werkzeug.security.check_password_hash
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    email = session.get('email-address')
-
     if request.method == 'POST':
         email = request.form["email-address"]
         password = request.form['pass']
         acc = mongo.db.account.find_one({"email-address": email})
 
-        if mongo.db.account.find_one({"email-address": email}) and mongo.db.account.find_one({"pass": password}):
+        if acc and mongo.db.account.find_one({"pass": password}):
             session['email'] = acc['email-address']
             return render_template('index.html')
         else:
@@ -35,7 +49,7 @@ def login():
 
     return render_template('login.html')
 
-# First try
+# -------------- First try -------------------- #
 # @app.route('/login', methods=['GET', 'POST'])
 # def login():
 #     users = mongo.db.user
@@ -51,7 +65,6 @@ def login():
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
-    email = session.get('email-address')
 
     if request.method == 'POST':
         email = request.form['email-address']
@@ -72,15 +85,6 @@ def logout():
     session.pop('email', None)
     return redirect('login')
 
-@app.route('/shoppingList', methods=["GET", "POST"])
-def shoppingList():
-    if request.method == "POST":
-        itemName = mongo.db.itemName.find()
-        return render_template('shopping-list.html', itemName=itemName)
-    if request.method == "GET":
-        email = session.get('email-address')
-        if not email:
-            return render_template('login.html')
 
 @app.route('/listItem')
 def listItem():

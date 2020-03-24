@@ -65,8 +65,7 @@
     width: 100%;
     height: auto;
     text-align: center;
-    background-color: rgb(251, 251, 162);
-    padding: 20px 0;
+    padding-bottom: 20px;
 }
 
 .shopping-list-item {
@@ -88,17 +87,51 @@
 }
 
 .btns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 10px;
     margin: 50px 0;
+    border-radius: 5px;
     background-color: rgb(100, 4, 209);
     color: #FFF;
 }
 
 .btns:hover {
     text-decoration: none;
+}
+
+.add-item-btn {
+    width: 200px;
+    padding: 10px;
+    margin: 0;
+    border-radius: 5px;
+    color: #FFF;
+    background-color: rgb(100, 4, 209);
+    transition: .5s;
+}
+
+.add-item-btn:hover {
+    color: #FFF;
+    background-color: rgb(85, 2, 179);
+    text-decoration: none;
+}
+
+.del-btn {
+    margin: 50px 0;
+}
+
+.white-btn{
+    color: #fff;
+}
+
+.red-btn {
+    color: #ff0000;
+}
+
+.white-btn:hover{
+    color: #fff;
+}
+
+.red-btn:hover {
+    color: #ff0000;
 }
 
 .btn-text-style {
@@ -130,4 +163,26 @@
 
 .link-decor:hover {
     color: #000;
+}
+
+/* Editing Pages */
+.edit-pages-section {
+    width: 100%;
+    height: 68vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-pages-head-paddings {
+    padding-bottom: 20px;
+}
+
+.edit-pages-btn-margins {
+    margin-top: 30px;
+}
+
+.form-positioning {
+    margin-bottom: 30px;
 }

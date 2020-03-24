@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center head-padding-bottom">
-                <h1>Shopping List of {{ session['email'] }}</h1>
+                <h1>Shopping List</h1>
             </div>
         </div>
     </div>
@@ -79,8 +79,8 @@
                                     <p class="no-margin">{{ item.amount }}</p>
                                 </div>
                                 <div class="col-4">
-                                    <a href="{{ url_for('editItem', item_id=item._id) }}">Edit Item</a>
-                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}">Delete Item</a>
+                                    <a href="{{ url_for('editItem', item_id=item._id) }}" class="white-btn">Edit Item</a>
+                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}" class="red-btn">Delete Item</a>
                                 </div>
                             </div>
                         </div>
@@ -97,15 +97,14 @@
                                 </div>
                                 <div class="col-4">
                                     <a href="{{ url_for('editItem', item_id=item._id) }}">Edit Item</a>
-                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}">Delete Item</a>
+                                    <a href="{{ url_for('deleteItem', item_id=item._id) }}" class="red-btn">Delete Item</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% endif %}
                     {% if loop.index == loop.length %}
-                    <a href="{{ url_for('delList', item_id=item._id) }}">
-                        <button class="btn btn-danger" type="submit">Delete Entire Shopping-List</button>
+                    <a href="{{ url_for('delList', item_id=item._id) }}" class="btn btn-danger del-btn" type="submit">Delete Entire Shopping-List
                     </a>
                     {% endif %}
                     {% endif %}
@@ -114,10 +113,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <a href="{{ url_for('addItem') }}">
-                                    <p>Add New Item</p>
-                                </a>
-                                
+                                <a href="{{ url_for('addItem') }}" class="add-item-btn ">Add Item</a>     
                             </div>
                         </div>
                     </div>

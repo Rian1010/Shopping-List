@@ -61,9 +61,7 @@ def register():
         else:
             mongo.db.account.insert_one(account)
             session['email'] = request.form['email-address']
-            item = mongo.db.itemName
-            item.insert_one(
-                {'owner': session['email']})
+            
             return render_template('index.html', account=account, password=password)
 
     return render_template('register.html')

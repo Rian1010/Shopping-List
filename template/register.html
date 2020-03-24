@@ -19,16 +19,15 @@
 {% endblock %}
 
 {% block content %}
-<section>
+<section class="edit-pages-section">
     <div class="container">
         <div class="row">
-            <div class="col-12 text-center head-padding-bottom">
+            <div class="col-12 text-center edit-pages-head-paddings">
                 <h1>Register</h1>
             </div>
         </div>
     </div>
-</section>
-<section>
+
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4">
@@ -44,7 +43,7 @@
                         <label for="">Password</label>
                         <input type="password" name="pass" class="form-control" placeholder="Password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block btns">Register Now!</button>
+                    <button type="submit" class="btn btn-block btns">Register Now!</button>
                 </form>
                 <div class="text-center">
                     <a href="{{ url_for('login') }}">Login Here Now!</a>

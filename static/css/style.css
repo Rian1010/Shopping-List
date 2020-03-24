@@ -95,7 +95,12 @@
 }
 
 .btns:hover {
+    background-color: rgb(85, 2, 179);
     text-decoration: none;
+}
+
+.add-btn-margin {
+    margin-top: 30px;
 }
 
 .add-item-btn {
@@ -115,7 +120,7 @@
 }
 
 .del-btn {
-    margin: 50px 0;
+    margin-top: 50px;
 }
 
 .white-btn{
@@ -176,7 +181,7 @@
 }
 
 .edit-pages-head-paddings {
-    padding-bottom: 20px;
+    padding: 20px;
 }
 
 .edit-pages-btn-margins {

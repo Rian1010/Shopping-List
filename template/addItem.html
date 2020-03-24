@@ -35,7 +35,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <form action="{{ url_for('insertItem') }}" method="POST" class="col-12 text-center">
+                <form action="{{ url_for('insertItem', owner_id=accounts._id) }}" method="POST" class="col-12 text-center">
                     <div class="row">
                         <div class="col-12">
                             <input type="text" id="itemName" name="itName" placeholder="List Item Name">

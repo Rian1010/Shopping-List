@@ -27,15 +27,7 @@ def login():
 
         if acc and mongo.db.account.find_one({"pass": password}):
             session['email'] = acc['email-address']
-            item = mongo.db.itemName
-            item.insert_one(
-                {'owner': session['email'],
-                'itName': "",
-                'itName2': "",
-                'itName3': "",
-                'amount': ""
-        })
-            return render_template('index.html', itemName=item)
+            return render_template('index.html')
         else:
             return 'Invalid email or password'
 
@@ -69,6 +61,16 @@ def register():
         else:
             mongo.db.account.insert_one(account)
             session['email'] = request.form['email-address']
+            item = mongo.db.itemName
+            item.insert_one(
+                {'owner': session['email'],
+                 'itName': "",
+                 'itName2': "",
+                 'itName3': "",
+                 'amount': "",
+                 'amount2': "",
+                 'amount3': ""
+                 })
             return render_template('index.html', account=account, password=password)
 
     return render_template('register.html')
@@ -125,7 +127,11 @@ def insertItem():
     itemName = mongo.db.itemName
     itemName.insert_one({
         'itName': request.form.get('itName'),
-        'amount': request.form.get('amount')
+        'amount': request.form.get('amount'),
+        'itName2': request.form.get('itName2'),
+        'amount2': request.form.get('amount2'),
+        'itName3': request.form.get('itName3'),
+        'amount3': request.form.get('amount3')
     })
     return redirect(url_for('shoppingList'))
 
@@ -133,42 +139,72 @@ def insertItem():
 @app.route('/updateItemName/<item_id>', methods=['GET', 'POST'])
 def updateItemName(item_id):
     itemName = mongo.db.itemName
-    accounts = mongo.db.account.find()
     itemName.update({"_id": ObjectId(item_id)},
                     {
-                    'owner': session['email'],
                     'itName': request.form.get('itName'),
-                    'amount': request.form.get('amount')
+                    'amount': request.form.get('amount'),
+                    'itName2': request.form.get('itName2'),
+                    'amount2': request.form.get('amount2'),
+                    'itName3': request.form.get('itName3'),
+                    'amount3': request.form.get('amount3')
                     },)
-    return redirect(url_for('shoppingList', itemName=itemName, accounts=accounts))
-
-
-@app.route('/editList/<list_id>')
-def editList(list_id):
-    listName=mongo.db.listName.find_one({"_id": ObjectId(list_id)})
-    return render_template('editShoppingList.html', listName = listName)
+    return redirect(url_for('shoppingList', itemName=itemName))
 
 
 @app.route('/editItem/<item_id>')
 def editItem(item_id):
-    itemName=mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
-    return render_template('editListItem.html', itemName = itemName)
+    itemName = mongo.db.itemName.find_one({"_id": ObjectId(item_id)})
+    return render_template('editListItem.html', itemName=itemName)
 
 
-@app.route('/deleteList')
-def deleteList():
-    mongo.db.itemName.remove()
+@app.route('/delList/<item_id>')
+def delList(item_id):
+    itemName = mongo.db.itemName
+    itemName.update({"_id": ObjectId(item_id)},
+                    {
+                    'itName': "",
+                    'amount': "",
+                    'itName2': "",
+                    'amount2': "",
+                    'itName3': "",
+                    'amount3': ""
+                    },)
     return redirect(url_for('shoppingList'))
 
 
-@app.route('/deleteItem/<item_id>')
-def deleteItem(item_id):
-    mongo.db.itemName.remove({"_id": ObjectId(item_id)})
+@app.route('/deleteItem1/<item_id>')
+def deleteItem1(item_id):
+    itemName = mongo.db.itemName
+    itemName.update({"_id": ObjectId(item_id)},
+                    {
+                    'itName': "",
+                    'amount': "",
+                    },)
+    return redirect(url_for('shoppingList'))
+
+@app.route('/deleteItem2/<item_id>')
+def deleteItem2(item_id):
+    itemName = mongo.db.itemName
+    itemName.update({"_id": ObjectId(item_id)},
+                    {
+                    'itName2': "",
+                    'amount2': "",
+                    },)
+    return redirect(url_for('shoppingList'))
+
+@app.route('/deleteItem3/<item_id>')
+def deleteItem3(item_id):
+    itemName = mongo.db.itemName
+    itemName.update({"_id": ObjectId(item_id)},
+                    {
+                    'itName3': "",
+                    'amount3': "",
+                    },)
     return redirect(url_for('shoppingList'))
 
 
 if __name__ == '__main__':
-    app.secret_key='mysecret'
-    app.run(host = os.environ.get('IP'),
-            port = os.environ.get('PORT'),
-            debug = True)
+    app.secret_key = 'mysecret'
+    app.run(host=os.environ.get('IP'),
+            port=os.environ.get('PORT'),
+            debug=True)

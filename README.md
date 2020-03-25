@@ -15,22 +15,22 @@ This project is a web application that was made for users to list up the product
 ### Install Heroku:
 - $ brew tap heroku/brew && brew install heroku
 
-### Deployment onto Heroku
-- Install Homebrew:
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$ heroku login
-$ git init
-- The Github repository gets initialised through git init
-$ pip3 freeze --local > requirements.txt
-$ touch Procfile
-- A Procfile indicates to Heroku, which file is supposed to be used to run the application
-$ git add .
-- Each file gets added through git add .
-$ git commit -m ""
-$ heroku git:remote -a shopping-list-google
-$ git push heroku master
-- Run the application on Heroku by using the following line:
-$ heroku ps:scale web=1
+## Deployment onto Heroku
+###Install Homebrew:
+- $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+- $ heroku login
+- $ git init
+### The Github repository gets initialised through git init
+- $ pip3 freeze --local > requirements.txt
+- $ touch Procfile
+### A Procfile indicates to Heroku, which file is supposed to be used to run the application
+- $ git add .
+###  Each file gets added through git add .
+- $ git commit -m ""
+- $ heroku git:remote -a shopping-list-google
+- $ git push heroku master
+### Run the application on Heroku by using the following line:
+- $ heroku ps:scale web=1
 
 ## Technologies
 - HTML5

@@ -35,6 +35,7 @@ $ touch Procfile
 - Logout: https://www.bogotobogo.com/python/Flask/Python_Flask_Blog_App_Tutorial_2.php
 - Flask for loops:
 https://ansiblemaster.wordpress.com/2016/07/27/jinja2-using-loop-index-and-loop-length-examples-etchosts-and-workers-properties/
+- Shopping-List Page Image: https://pixabay.com/de/photos/einkaufswagen-einkaufen-shopping-1080840/
 
 Adding items separately:
 @app.route('/insertItem/<owner_id>', methods=['GET', 'POST'])

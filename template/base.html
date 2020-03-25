@@ -8,7 +8,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    <title>Document</title>
+    {% block title %} {% endblock %}
 </head>
 
 <body>
@@ -31,12 +31,20 @@
                 <div class="col-sm-12 col-md-6">
                     <h2>Social Media</h2>
                     <ul class="footer-items">
-						<li class="footer-link"><a href="http://www.instagram.com" class="link-decor" target="_blank">Instagram</a></li>
+                        <li class="footer-link"><a href="http://www.instagram.com" class="link-decor" target="_blank">Instagram</a></li>
+                        <li class="footer-link"><a href="http://www.facebook.com" class="link-decor" target="_blank">Facebook</a></li>
 					</ul>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+		integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+	</script>
 </body>
 
 </html>

@@ -49,16 +49,29 @@
 }
 
 /* Shopping-List Page */
-.page-padding-top {
-    padding-top: 50px;
+
+.shop-list-pic {
+    width: 100%;
+    height: 65vh;
+    color: #fff;
+    background-image: linear-gradient(to right, rgba(0, 17, 54, 0.3), rgba(0, 0, 0, 0.2), rgba(0, 17, 54, 0.3)), url('../images/shopping-list-image.jpg');
+    background-size: cover;
+    text-align: center;
+    display: flex;
+    align-items: center;
 }
 
-.page-padding-bottom {
-    padding-bottom: 50px;
+.shopping-pages-section {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.head-padding-bottom {
-    padding-bottom: 50px;
+.list-page-padding {
+    padding: 50px 0;
 }
 
 .shopping-list {
@@ -69,7 +82,7 @@
 }
 
 .shopping-list-item {
-    margin:0;
+    margin: 0;
     padding: 20px 0;
 }
 
@@ -77,9 +90,14 @@
     margin: 0;
 }
 
-.item-bground-purple {
+.item-head-bground-purple {
     color: #fff;
     background-color: rgb(109, 0, 235);
+}
+
+.item-bground-purple {
+    color: #fff;
+    background-color: rgba(109, 0, 235, 0.8);
 }
 
 .item-bground-white {
@@ -123,7 +141,7 @@
     margin-top: 50px;
 }
 
-.white-btn{
+.white-btn {
     color: #fff;
 }
 
@@ -131,7 +149,7 @@
     color: #ff0000;
 }
 
-.white-btn:hover{
+.white-btn:hover {
     color: #fff;
 }
 
@@ -182,6 +200,7 @@
 
 .edit-pages-head-paddings {
     padding: 20px;
+    margin-top: 20px;
 }
 
 .edit-pages-btn-margins {

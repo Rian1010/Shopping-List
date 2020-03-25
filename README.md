@@ -1,5 +1,5 @@
 # Shopping-List 
-This project is a web application that was made for users to list up the products, which they have to purhase, into one online-shopping-list. It is a responsive app, which can be used on multiple devices. Click [here](http://shopping-list-google.herokuapp.com/) to get to the link to the Heroku link.
+This project is a web application that was made for users to list up the products, which they have to purhase, into one online-shopping-list. It is a responsive app, which can be used on multiple devices. Click [here](http://shopping-list-google.herokuapp.com/) to go to the Heroku link.
 
 ## Installations
 ### How to Install Flask:
@@ -59,6 +59,7 @@ The way I solved the problem of one shopping-list being visible to everyone, was
 The biggest challenge for me was to enable each user to have a shopping-list, which only they could view because I had never done that before. Espacially for this part, I got many errors, which I solved with time by going through the code in the app.py file and the HTML templates. 
 
 At first, I was going to have a limited amount of items that could be edited. Once one would login, the user should get a set amount of empty values for item names and their quantity, which one should edit in order to create one's own shopping-list. Here is an example of what I had done, in the code below:
+```python
     itemName = mongo.db.itemName
     itemName.insert_one({
         'owner': session['email'],
@@ -67,9 +68,11 @@ At first, I was going to have a limited amount of items that could be edited. On
         'itName2': "",
         'amount2': ""
     })
-
+```
 As a result, I had removed the insertion functionality for new items. However, the problem was that the amount of empty strings I had set, like in the example above, would be added over and over again, after each time a user would login. So, I moved that part of the code to the registration route instead, so that that set amount of values for the items and quantity would appear only once after a user's registration. Then, the problem was that, if one deleted a shopping-list, one could never get it back. As a result, I decided to include the functionality of adding individual shopping-list-items back again. Throughout the process of coding again, I connected the 'owner' with the session['email] for the shopping-list information to be added to the corresponding accounts on MongoDB. So, that is when I noticed this pattern of having to include this following line of code, among the other strings in the collection, to the routes for insertions and updates: 
-- 'owner': session['email'],
+```python
+'owner': session['email'],
+```
 
 Therefore, I managed to finish the web application, which now has editable shopping-lists that persist between logins. Finally, I worked on the last touches of the design of the website and uploaded it onto Heroku and Github. 
 

@@ -75,7 +75,8 @@ def logout():
 
 @app.route('/shoppingList', methods=["GET", "POST"])
 def shoppingList():
-    if 'email' in session:
+    email =  session.get('email')
+    if email:
         itemName = mongo.db.itemName.find()
         return render_template("shopping-list.html", itemName=itemName)
     return render_template('login.html')

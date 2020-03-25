@@ -106,8 +106,7 @@
                     </div>
                     {% endif %}
                     {% if loop.index == loop.length %}
-                    <a href="{{ url_for('delList', item_id=item._id) }}" class="btn btn-danger del-btn" type="submit">Delete Entire Shopping-List
-                    </a>
+                    <a href="{{ url_for('delList', item_id=item._id) }}" class="btn btn-danger del-btn" type="submit">Delete Entire Shopping-List</a>
                     {% endif %}
                     {% endif %}
                     {% endfor %}

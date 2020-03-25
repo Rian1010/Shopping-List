@@ -37,7 +37,7 @@ $ touch Procfile
 [Ansiblemaster](https://ansiblemaster.wordpress.com/2016/07/27/jinja2-using-loop-index-and-loop-length-examples-etchosts-and-workers-properties/)
 
 ##My First Step After Installing Everything
-A basic design for the website was required. I used yellow for the navigation bars and footer because 
+A basic design for the website was required, so I made a wireframe. I used yellow for the navigation bars and footer because I find that it fits to the shopping theme and I added purple elements too, as purple fits well together with yellow.
 
 At first, I tried adding each shopping-list item separately:
 @app.route('/insertItem/<owner_id>', methods=['GET', 'POST'])

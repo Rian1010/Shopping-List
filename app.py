@@ -12,7 +12,8 @@ mongo = PyMongo(app)
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-    if session['email']:
+    email =  session.get('email')
+    if email:
         itemName = mongo.db.itemName.find()
         return render_template('index.html', itemName=itemName)
     return render_template('login.html')

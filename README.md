@@ -16,7 +16,7 @@ This project is a web application that was made for users to list up the product
 - $ brew tap heroku/brew && brew install heroku
 
 ## Deployment onto Heroku
-###Install Homebrew:
+### Install Homebrew:
 - $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 - $ heroku login
 - $ git init

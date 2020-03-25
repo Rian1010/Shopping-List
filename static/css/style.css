@@ -171,23 +171,6 @@
     background-color: rgb(255, 208, 0);
 }
 
-.footer-items {
-    padding: 0;
-}
-
-.footer-link {
-    text-decoration: none;
-    list-style: none;
-}
-
-.link-decor {
-    color: #000;
-}
-
-.link-decor:hover {
-    color: #000;
-}
-
 /* Editing Pages */
 .edit-pages-section {
     width: 100%;
@@ -209,4 +192,28 @@
 
 .form-positioning {
     margin-bottom: 30px;
+}
+
+/* Navigation bar */
+.navbar-colour {
+    background-color: rgb(255, 225, 94);
+}
+
+/* Footer */
+
+.footer-items {
+    padding: 0;
+}
+
+.footer-link {
+    text-decoration: none;
+    list-style: none;
+}
+
+.link-decor {
+    color: #000;
+}
+
+.link-decor:hover {
+    color: #000;
 }
